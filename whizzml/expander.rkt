@@ -154,7 +154,7 @@
        #'(letrec ((id (w-lambda (formals args ...) (body forms ...)))) id))]))
 (provide (rename-out [w-lambda lambda]))
 
-(require (prefix-in containers: "containers.rkt"))
+(require (prefix-in containers: whizzml/primitives/containers))
 
 (define (w-apply f . args)
   (cond [(procedure? f) (apply f args)]
@@ -168,5 +168,7 @@
     [(_ f args ...) #'(w-apply f args ...)]))
 (provide app (rename-out [app #%app]))
 
-(provide + - * / abs acos asin atan (rename-out [modulo mod] [equal? =])
-         < <= > >= and or not)
+(provide and or not)
+
+(require whizzml/primitives/all)
+(provide (all-from-out whizzml/primitives/all))

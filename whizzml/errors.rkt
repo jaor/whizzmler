@@ -3,7 +3,8 @@
 (provide (struct-out whizzml-error)
          make-system-error
          signal
-         signal-arity)
+         signal-arity
+         signal-exn)
 
 (struct whizzml-error (value) #:transparent)
 (struct whizzml-system-error whizzml-error () #:transparent)
@@ -43,3 +44,6 @@
                [else (~a from " or more")])
          (if (empty? msgs) "" "-")
          msgs))
+
+(define (signal-exn name e)
+  (signal name (exn-message e)))
